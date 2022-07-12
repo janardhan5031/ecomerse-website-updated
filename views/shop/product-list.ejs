@@ -15,6 +15,9 @@
                                         <%= product.title %>
                                     </h1>
                                 </header>
+                                <div class="form-control">
+                                    
+                                </div>
                                 <div class="card__image">
                                     <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
                                 </div>
@@ -27,8 +30,13 @@
                                     </p>
                                 </div>
                                 <div class="card__actions">
-                                    <a href="/product/<%= product.id %>" class="btn">Details</a>
+                                    <a href="/product/<%= product.id %>" class="btn">Details</a><br>
                                     <form action="/cart" method="post">
+                                        size<input  class="list_items" list="size" name="size">
+                                        <datalist id="size">
+                                            <option>Small</option>
+                                            <option>Medium</option>                    
+                                        </datalist>
                                         <button class="btn" type="submit" > Add to cart</button>
                                         <input type="hidden" name="productId" value="<%= product.id %>">
                                     </form>

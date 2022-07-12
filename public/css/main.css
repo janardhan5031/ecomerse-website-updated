@@ -145,6 +145,10 @@ form {
   align-items: stretch;
 }
 
+.list_items{
+  margin: 1rem 1rem;
+}
+
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }

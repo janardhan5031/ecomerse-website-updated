@@ -42,8 +42,11 @@ exports.getCart = (req, res, next) => {
 
 exports.postcart=(req, res, next) => {
   const prodId=req.body.productId;
+  const size=req.body.size;
+  console.log(size);
   Product.findById(prodId, (product)=>{
-    cart.addProduct(prodId, product.price);
+    //storing data in cart model file using cart class we defined
+    cart.addProduct(prodId, size,product.price);
   });
   res.redirect('/cart');
 };

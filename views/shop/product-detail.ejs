@@ -5,10 +5,16 @@
         <%- include('../includes/navigation.ejs') %>
         <main class="centered">
             <h1><%= product.title %></h1>
+            <h1><%= product.size %></h1>
             <h1><%= product.id %></h1>
             <h1><%= product.description %></h1>
             <h1><%= product.price %></h1>
             <form action="/cart" method="post">
+                size<input  class="list_items" list="size" name="size">
+                <datalist id="size">
+                    <option>Small</option>
+                    <option>Medium</option>                    
+                </datalist>
                 <button class="btn" type="submit" > Add to cart</button>
                 <input type="hidden" name="productId" value="<%= product.id %>">
             </form>

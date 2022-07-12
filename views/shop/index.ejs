@@ -13,6 +13,9 @@
                         <header class="card__header">
                             <h1 class="product__title"><%= product.title %></h1>
                         </header>
+                        <div class="form-control">
+                            
+                        </div>
                         <div class="card__image">
                             <img src="<%= product.imageUrl %>"
                                 alt="<%= product.title %>">
@@ -23,6 +26,11 @@
                         </div>
                         <div class="card__actions">
                             <form action="/cart" method="post">
+                                size<input  class="list_items" list="size" name="size">
+                                <datalist id="size">
+                                    <option>Small</option>
+                                    <option>Medium</option>                    
+                                </datalist>
                                 <button class="btn" type="submit" > Add to cart</button>
                                 <input type="hidden" name="productId" value="<%= product.id %>">
                             </form>                        </div>
