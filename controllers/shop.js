@@ -2,8 +2,8 @@ const cart = require('../models/cart');
 const Product = require('../models/product');
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
-  .then(([rows])=>{
+  Product.findAll()
+  .then((rows)=>{
     res.render('shop/product-list', {
       prods: rows,
       pageTitle: 'All Products',
@@ -15,30 +15,40 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct=(req,res,next)=>{
   const prodId=req.params.productId;
-  Product.findById(prodId)
-    .then(([product])=>{      //here destructuring the resultant array to store the data array using '[]'
+  Product.findAll({where:{id:prodId} })  //finding the single product with id using where clause
+  .then((products)=>{   //it will return array of elements those matches
+    res.render('shop/product-detail',{
+      product:products[0],
+      pageTitle:'product details',
+      path:'/'
+    }); 
+  })
+  .catch(err=>console.log(err));
+
+  //another method
+ /* Product.findById(prodId)
+    .then((product)=>{      //here destructuring the resultant array to store the data array using '[]'
       //console.log(product);
       res.render('shop/product-detail',{
-        product:product[0],
+        product:product,
         pageTitle:'product details',
         path:'/'
       });   // redirecting to home page for confirmation
     })
     .catch(err=>console.log(err));
+    */
 }
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll()
-    .then(([rows])=>{
-      //console.log(rows);
-      res.render('shop/index',{
-        prods:rows,
-        pageTitle:'shop',
-        path:'/'
-      });
-    })
-    .catch(err=>console.log(err));
-
+  Product.findAll()
+  .then(products=>{
+    res.render('shop/index',{
+      prods:products,
+      pageTitle:'shop',
+      path:'/'
+    });
+  })
+  .catch(err =>console.log(err));
 };
 
 exports.getCart = (req, res, next) => {
